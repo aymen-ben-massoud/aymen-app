@@ -1,5 +1,5 @@
-import { url } from "inspector";
-import Link from "next/link";
+import { index } from "drizzle-orm/mysql-core";
+import { db } from "~/server/db";
 
 
 const imgUrl = [ "https://utfs.io/f/a7d5e7a1-2b95-4aaf-a62c-773eafd467be-21qso.jpg",
@@ -10,13 +10,18 @@ const imgUrl = [ "https://utfs.io/f/a7d5e7a1-2b95-4aaf-a62c-773eafd467be-21qso.j
   url,
   id : index + 1
  }))
-export default function HomePage() {
+export default async  function HomePage() {
+  const posts = await db.query.posts.findMany()
+  
   return (
 <main>
 
   <div className="flex flex-wrap justify-center ">
+    {posts.map((post)=> (
+      <h1 className="text-xl">{post.name}</h1>
+    ))}
     {images.map((image)=> (
-      <div   key={image.id}>
+      <div   key={image.id }>
         <img className="divimagesstyle m-2"  src={image.url} alt="" />
       </div>
     ))}
