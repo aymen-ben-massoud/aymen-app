@@ -13,6 +13,7 @@ export default async  function HomePage() {
 
   <div className="flex flex-wrap justify-center ">
   
+  
     {images.map((image)=> (
       <div   key={image.id }>
         <img className="divimagesstyle m-2"  src={image.url} alt="" />
